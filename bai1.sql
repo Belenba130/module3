@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS Contacts(
  
  
  -- Bảng ORDERS
- CREATE TABLE IF NOT EXISTS Oders(
+ CREATE TABLE IF NOT EXISTS Orders(
  id int NOT NULL PRIMARY KEY, 	
  customer_id int not null,
  total int,
@@ -65,7 +65,9 @@ CREATE TABLE IF NOT EXISTS Contacts(
  product_id int not null,
  order_id int not null,
  price float,
- quantity int);
+ quantity int,
+ foreign key (id) references Orders(id),
+ foreign key (product_id) references products(id));
  
  
  -- BẢNG CATEGORIES
@@ -129,10 +131,12 @@ CREATE TABLE IF NOT EXISTS Contacts(
 -- 	BẢNG COMMENTS
 CREATE TABLE IF NOT EXISTS Comments(
  id int NOT NULL PRIMARY KEY, 
- user_id nvarchar(255),
- service_id nvarchar(255),
+ user_id int not null,
+ product_id int not null,
  message nvarchar(255),	
- Status bit);
- 
+ Status bit,
+ foreign key (user_id) references users(id),
+ foreign key (product_id) references products(id)
+ );
  show tables;
 
